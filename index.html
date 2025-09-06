@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harish S | Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #0f2027; color: white; overflow-x: hidden; position: relative; }
+
+    header, section { padding: 80px 10%; }
+    h1, h2 { margin-bottom: 20px; }
+    h1 span { color: #00ffcc; }
+
+    nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: center; align-items: center; padding: 20px 10%; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); border-bottom: 1px solid rgba(0,255,204,0.3); }
+    nav div { display: flex; gap: 40px; }
+    nav a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; position: relative; font-size: 1.1rem; }
+    nav a::after { content: ''; position: absolute; width: 0; height: 2px; background: #00ffcc; left: 0; bottom: -4px; transition: 0.3s; }
+    nav a:hover::after { width: 100%; }
+    nav a:hover { color: #00ffcc; }
+
+    .hero { min-height: 100vh; display: flex; justify-content: space-between; align-items: center; padding-top: 120px; animation: fadeIn 2s ease-in-out; }
+    .hero-content { flex: 1; text-align: left; }
+    .hero h1 { font-size: 3rem; animation: zoomIn 2s ease; }
+    .hero p { font-size: 1.2rem; margin: 15px 0; animation: fadeInUp 2s ease; }
+    .btn { display: inline-block; margin-top: 20px; padding: 12px 24px; background: #00ffcc; 
+           color: black; border-radius: 30px; font-weight: bold; text-decoration: none; transition: 0.3s; animation: pulse 2s infinite; }
+    .btn:hover { background: white; transform: scale(1.05); }
+
+    .social-icons { margin-top: 25px; display: flex; gap: 15px; }
+    .social-icons a { color: #00ffcc; font-size: 1.6rem; transition: 0.3s; }
+    .social-icons a:hover { color: white; }
+
+    .hero-img { flex: 1; display: flex; justify-content: center; }
+    .hero-img img { width: 280px; height: 280px; border-radius: 50%; border: 4px solid #00ffcc; box-shadow: 0 0 20px #00ffcc; object-fit: cover; animation: fadeInUp 2s ease; }
+
+    .skills { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 60px; margin: 50px 0; box-shadow: 0 0 20px rgba(0, 255, 204, 0.2); text-align: center; }
+    .skills h2 { font-size: 2.2rem; margin-bottom: 25px; color: #00ffcc; letter-spacing: 1px; }
+    .skills p { font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: auto; color: #e0e0e0; }
+    .skills { display: flex; flex-wrap: wrap; gap: 15px; animation: fadeInUp 2s ease; }
+    .skill { background: rgba(255,255,255,0.1); padding: 12px 20px; border-radius: 25px; transition: 0.3s; transform: scale(0.9); }
+    .skill:hover { background: #00ffcc; color: black; transform: scale(1.1); box-shadow: 0 0 20px #00ffcc; }
+
+    .projects { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 60px; margin: 50px 0; box-shadow: 0 0 20px rgba(0, 255, 204, 0.2); text-align: left; }
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; animation: fadeInUp 2s ease; }
+    .card { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; transition: 0.3s; transform: translateY(50px); opacity: 0; }
+    .card:hover { transform: translateY(-5px) scale(1.03); background: rgba(0,255,204,0.2); box-shadow: 0 0 20px #00ffcc; }
+    .card.show { transform: translateY(0); opacity: 1; transition: 0.6s ease-in-out; }
+
+    #contact {
+  padding: 80px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  text-align: center;
+  border-radius: 15px;
+  margin: 50px auto;
+  max-width: 900px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+#contact h2 {
+  font-size: 2.5rem;
+  color: cyan;
+  margin-bottom: 50px;
+  text-shadow: 0 0 12px cyan;
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.contact-card {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 25px;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.contact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 20px cyan;
+}
+
+.contact-card .icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background: rgba(0, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: cyan;
+  box-shadow: 0 0 10px cyan inset, 0 0 15px cyan;
+}
+
+.contact-card p {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.contact-card a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.contact-card a:hover {
+  color: cyan;
+  text-shadow: 0 0 8px cyan;
+}
+
+    footer { text-align: center; padding: 30px; background: rgba(0,0,0,0.8); animation: fadeIn 3s ease; }
+    footer a { margin: 0 10px; color: #00ffcc; text-decoration: none; }
+    /* About Section Styling */
+    #about { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 60px; margin: 50px 0; box-shadow: 0 0 20px rgba(0, 255, 204, 0.2); text-align: center; }
+    #about h2 { font-size: 2.2rem; margin-bottom: 25px; color: #00ffcc; letter-spacing: 1px; }
+    #about p { font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: auto; color: #e0e0e0; }
+    /* Animations */
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    @keyframes fadeInUp { from {transform: translateY(40px); opacity:0;} to {transform: translateY(0); opacity:1;} }
+    @keyframes zoomIn { from {transform: scale(0.8);} to {transform: scale(1);} }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+    /* Particles Background */
+    canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<nav>
+  <div>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Hi, I'm <span>Harish</span></h1>
+    <p>Aspiring AI/ML Developer | Computer Science Student at Vellore Institute of Technology (VIT Vellore Campus)
+    </p>
+    <a href="#projects" class="btn">View My Work</a>
+
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/harish-selvam-752820291/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/tn_harish_18/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com/TN_Harish_07?t=Q7QXitJo-nTGQdfUSS0lcg&s=09 " target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://github.com/harish2025-selvam" target="_blank"><i class="fab fa-github"></i></a>
+    </div>
+  </div>
+
+  <div class="hero-img">
+    <img src="IMG-20250906-WA0004.jpg" alt="Harish Photo">
+  </div>
+</section>
+
+<section id="about">
+  <h2>About Me</h2>
+  <p>Hello! I’m Harish S, an 18-year-old Computer Science student at VIT Vellore with a strong passion for Artificial Intelligence, Machine Learning, Deep Learning, and Computer Vision. I enjoy learning new technologies, experimenting with ideas, and building projects that combine creativity with real-world impact.<br>
+
+    Over time, I have worked on projects like Stock Market Trend Prediction, Predictive Maintenance Systems, and frontend web development for stock analysis platforms. Alongside, I have earned certifications in Programming in C, Full Stack Development, Ethical Hacking, Data Analytics, Networking, and Generative AI, which have helped me strengthen both my technical and problem-solving skills.<br>
+    
+    Outside academics, I have actively contributed as a hackathon winner and a volunteer during community initiatives such as blood donation, teaching technical subjects to school students, and supporting disaster relief. My long-term goal is to become an AI/ML developer and contribute to innovations that solve complex challenges and create meaningful change.</p>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills">
+    <div class="skill">Python</div>
+    <div class="skill">Artificial Intelligence</div>
+    <div class="skill">Machine Learning</div>
+    <div class="skill">Deep Learning</div>
+    <div class="skill">Computer Vision</div>
+    <div class="skill">Java</div>
+    <div class="skill">Full Stack Development</div>
+    <div class="skill">Data Analytics</div>
+    <div class="skill">Agile Methodologies</div>
+    <div class="skill">Statistical Computing</div>
+    <div class="skill">Search Engine Optimization</div>
+    <div class="skill">Market Research</div>
+    <div class="skill">Teamwork</div>
+    <div class="skill">Problem Solving</div>
+    <div class="skill">Data Structures and Algorithms</div>
+    <div class="skill">Web Development</div>
+    <div class="skill">Software Testing</div>
+    <div class="skill">Frontend Development</div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="card">
+      <b><h2>Sales Data Cleaning & Trend Analysis</h2></b>
+      <p> • Cleaned and standardized sales datasets for better accuracy.<br>
+        • Performed exploratory data analysis (EDA) to uncover sales
+        patterns and seasonal demand.<br>
+        • Built visualizations using Python (Pandas, Matplotlib, Seaborn).</p>
+    </div>
+    <div class="card">
+      <b><h2>Customer Feedback Sentiment Analysis</h2></b>
+      <p> • Processed customer reviews using NLP techniques (TextBlob) for
+        sentiment classification.<br>
+        • Built a Streamlit dashboard to track real-time customer sentiment
+        trends.<br>
+        • Highlighted insights to support service improvement.</p>
+    </div>
+  
+    <div class="card">
+      <b><h3>Stock Market Trend Prediction</h3></b>
+      <p> • Developed ML models for predicting stock price movements using
+        time-series data<br>
+        • Applied feature engineering and evaluation metrics to improve
+        model accuracy.<br>
+        • Created visual insights to demonstrate real-world decision-making
+        support.</p>
+    </div>
+    <div class="card">
+      <h2>Predictive Maintenance</h2>
+      <p>Frontend project to monitor and predict machine failures using AI-driven insights.</p>
+    </div>
+    <div class="card">
+      <h2>Screener.in Clone</h2>
+      <p>Frontend-only stock market website built with HTML/CSS/JS and React using Twelve Data API.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Me</h2>
+  <p>Phone: <a href="tel:+919344836853">+91 9344836853</a></p>
+  <p>Email: <a href="mailto:harish.selvam2025@gmail.com.com" target="_blank">harish.selvam2025@gmail.com</a></p>
+  <p>LinkedIn: <a href="https://www.linkedin.com/in/harish-selvam-752820291/" target="_blank">linkedin profile</a></p>
+</section>
+
+<footer>
+  <p>© 2025 Harish Selvam | Built with ❤️</p>
+</footer>
+
+<script>
+// Particle Animation
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particlesArray;
+class Particle {
+  constructor(x, y, directionX, directionY, size, color){
+    this.x = x;
+    this.y = y;
+    this.directionX = directionX;
+    this.directionY = directionY;
+    this.size = size;
+    this.color = color;
+  }
+  draw(){
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+  update(){
+    if(this.x + this.size > canvas.width || this.x - this.size < 0){ this.directionX = -this.directionX; }
+    if(this.y + this.size > canvas.height || this.y - this.size < 0){ this.directionY = -this.directionY; }
+    this.x += this.directionX;
+    this.y += this.directionY;
+    this.draw();
+  }
+}
+
+function init(){
+  particlesArray = [];
+  for(let i=0; i<100; i++){
+    let size = Math.random() * 3 + 1;
+    let x = Math.random() * (canvas.width - size * 2) + size;
+    let y = Math.random() * (canvas.height - size * 2) + size;
+    let directionX = (Math.random() * 0.4) - 0.2;
+    let directionY = (Math.random() * 0.4) - 0.2;
+    let color = 'rgba(0,255,204,0.8)';
+    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+  }
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particlesArray.forEach(particle => particle.update());
+}
+
+init();
+animate();
+
+// Reveal project cards on scroll
+const cards = document.querySelectorAll('.card');
+window.addEventListener('scroll', () => {
+  const triggerBottom = window.innerHeight * 0.8;
+  cards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    if(cardTop < triggerBottom){ card.classList.add('show'); }
+  });
+});
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  init();
+});
+</script>
+
+</body>
+</html>
