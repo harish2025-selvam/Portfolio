@@ -140,6 +140,45 @@
 
     /* Particles Background */
     canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+    /* Typing cursor */
+    .typed-cursor { color: #00ffcc; animation: blink 0.7s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+    /* Active nav link */
+    nav a.active { color: #00ffcc; }
+    nav a.active::after { width: 100%; }
+
+    /* Skills categories */
+    .skills-wrapper { display: flex; flex-direction: column; gap: 30px; animation: fadeInUp 2s ease; }
+    .skill-category h3 { color: #00ffcc; font-size: 1rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; border-left: 3px solid #00ffcc; padding-left: 10px; }
+    .skill-category .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    /* Project filter */
+    .filter-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+    .filter-btn { padding: 8px 18px; background: rgba(255,255,255,0.1); border: 1px solid rgba(0,255,204,0.4); color: #fff; border-radius: 20px; cursor: pointer; font-size: 0.85rem; transition: 0.3s; }
+    .filter-btn:hover, .filter-btn.active { background: #00ffcc; color: black; border-color: #00ffcc; }
+
+    /* Project card badges */
+    .card-badge { display: inline-block; font-size: 0.7rem; padding: 3px 10px; border-radius: 12px; margin-bottom: 10px; font-weight: 600; letter-spacing: 0.5px; }
+    .badge-ai { background: rgba(0,200,150,0.2); color: #00ffcc; border: 1px solid #00ffcc; }
+    .badge-fullstack { background: rgba(100,100,255,0.2); color: #aaaaff; border: 1px solid #aaaaff; }
+    .badge-cloud { background: rgba(255,165,0,0.2); color: #ffaa00; border: 1px solid #ffaa00; }
+    .badge-iot { background: rgba(255,80,80,0.2); color: #ff8080; border: 1px solid #ff8080; }
+    .badge-nlp { background: rgba(200,100,255,0.2); color: #cc88ff; border: 1px solid #cc88ff; }
+    .badge-web { background: rgba(0,180,255,0.2); color: #55ccff; border: 1px solid #55ccff; }
+
+    .card-links { margin-top: 12px; }
+    .card-link { display: inline-flex; align-items: center; gap: 5px; font-size: 0.8rem; color: #00ffcc; text-decoration: none; padding: 4px 12px; border: 1px solid rgba(0,255,204,0.4); border-radius: 15px; transition: 0.3s; }
+    .card-link:hover { background: #00ffcc; color: black; }
+    .card.hidden { display: none; }
+
+    /* Back to top */
+    #back-to-top { position: fixed; bottom: 30px; right: 30px; background: #00ffcc; color: black; border: none; border-radius: 50%; width: 44px; height: 44px; font-size: 1.2rem; cursor: pointer; display: none; align-items: center; justify-content: center; box-shadow: 0 0 14px #00ffcc; transition: 0.3s; z-index: 999; }
+    #back-to-top:hover { transform: scale(1.1); }
+    #back-to-top.visible { display: flex; }
+
+    html { scroll-behavior: smooth; }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -159,8 +198,7 @@
 <section class="hero">
   <div class="hero-content">
     <h1>Hi, I'm <span>Harish</span></h1>
-    <p>Aspiring AI/ML Developer | Computer Science Student at Vellore Institute of Technology (VIT Vellore Campus)
-    </p>
+    <p id="typed-text"></p>
     <a href="#projects" class="btn">View My Work</a>
 
     <div class="social-icons">
@@ -178,122 +216,202 @@
 
 <section id="about">
   <h2>About Me</h2>
-  <p>Hello! I’m Harish S, an 18-year-old Computer Science student at VIT Vellore with a strong passion for Artificial Intelligence, Machine Learning, Deep Learning, and Computer Vision. I enjoy learning new technologies, experimenting with ideas, and building projects that combine creativity with real-world impact.<br>
+  <p>Hello! I'm Harish S, a Computer Science student at VIT Vellore with a deep passion for Artificial Intelligence, Machine Learning, Computer Vision, and Full-Stack Development. I love building end-to-end solutions that bridge cutting-edge AI with real-world impact.<br><br>
 
-    Over time, I have worked on projects like Stock Market Trend Prediction, Predictive Maintenance Systems, and frontend web development for stock analysis platforms. Alongside, I have earned certifications in Programming in C, Full Stack Development, Ethical Hacking, Data Analytics, Networking, and Generative AI, which have helped me strengthen both my technical and problem-solving skills.<br>
-    
-    Outside academics, I have actively contributed as a hackathon winner and a volunteer during community initiatives such as blood donation, teaching technical subjects to school students, and supporting disaster relief. My long-term goal is to become an AI/ML developer and contribute to innovations that solve complex challenges and create meaningful change.</p>
+    My project portfolio spans multiple domains: <strong>AI &amp; Medical Imaging</strong> &mdash; a Breast Cancer Detection web app using a CNN + Transformer hybrid model; <strong>Computer Vision</strong> &mdash; an Automatic Number Plate Recognition (ANPR) system powered by YOLOv8 and EasyOCR with real-time alerts; <strong>Mobile AI</strong> &mdash; a Plant Disease Detector with a 75-class CNN model paired with a React Native app; <strong>Cloud &amp; Serverless</strong> &mdash; a production-ready Mule-to-AWS Lambda migration framework with 40+ component mappings; <strong>Full-Stack SaaS</strong> &mdash; iFlux, a multi-tenant BPMN-style workflow engine built in Go, React, and PostgreSQL with Keycloak auth, Redis queuing, and Stripe billing; <strong>IoT &amp; Automation</strong> &mdash; a virtual smart home simulator using event-driven architecture and MQTT; and <strong>NLP</strong> &mdash; a customer feedback sentiment analysis dashboard using TextBlob.<br><br>
+
+    I hold certifications in Programming in C, Full Stack Development, Ethical Hacking, Data Analytics, Networking, and Generative AI. Beyond academics, I've won hackathons and volunteered in blood donation drives, tech education for school students, and disaster relief support. My goal is to become an impactful AI/ML developer who builds solutions that truly matter.</p>
 </section>
 
 <section id="skills">
   <h2>Skills</h2>
-  <div class="skills">
-    <div class="skill">Python</div>
-    <div class="skill">Go</div>
-    <div class="skill">JavaScript</div>
-    <div class="skill">TypeScript</div>
-    <div class="skill">Java</div>
-    <div class="skill">Artificial Intelligence</div>
-    <div class="skill">Machine Learning</div>
-    <div class="skill">Deep Learning</div>
-    <div class="skill">Computer Vision</div>
-    <div class="skill">TensorFlow / Keras</div>
-    <div class="skill">CNN &amp; Transformers</div>
-    <div class="skill">Flask</div>
-    <div class="skill">React</div>
-    <div class="skill">React Native</div>
-    <div class="skill">Node.js</div>
-    <div class="skill">HTML / CSS</div>
-    <div class="skill">PostgreSQL</div>
-    <div class="skill">SQLite</div>
-    <div class="skill">Redis</div>
-    <div class="skill">AWS Lambda</div>
-    <div class="skill">AWS SAM / CDK</div>
-    <div class="skill">Docker</div>
-    <div class="skill">Keycloak</div>
-    <div class="skill">REST API</div>
-    <div class="skill">MQTT</div>
-    <div class="skill">WebSockets</div>
-    <div class="skill">OpenCV</div>
-    <div class="skill">EasyOCR</div>
-    <div class="skill">YOLOv8</div>
-    <div class="skill">Eleventy</div>
-    <div class="skill">Netlify CMS</div>
-    <div class="skill">Event-Driven Architecture</div>
-    <div class="skill">Microservices</div>
-    <div class="skill">Data Analytics</div>
-    <div class="skill">Full Stack Development</div>
-    <div class="skill">Data Structures and Algorithms</div>
-    <div class="skill">Agile Methodologies</div>
-    <div class="skill">Problem Solving</div>
+  <div class="skills-wrapper">
+    <div class="skill-category">
+      <h3>Languages</h3>
+      <div class="skill-tags">
+        <div class="skill">Python</div>
+        <div class="skill">Go</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">TypeScript</div>
+        <div class="skill">Java</div>
+        <div class="skill">HTML / CSS</div>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>AI / ML &amp; Computer Vision</h3>
+      <div class="skill-tags">
+        <div class="skill">Artificial Intelligence</div>
+        <div class="skill">Machine Learning</div>
+        <div class="skill">Deep Learning</div>
+        <div class="skill">Computer Vision</div>
+        <div class="skill">TensorFlow / Keras</div>
+        <div class="skill">CNN &amp; Transformers</div>
+        <div class="skill">YOLOv8</div>
+        <div class="skill">OpenCV</div>
+        <div class="skill">EasyOCR</div>
+        <div class="skill">NLP / TextBlob</div>
+        <div class="skill">Data Analytics</div>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Web &amp; Mobile Frameworks</h3>
+      <div class="skill-tags">
+        <div class="skill">Flask</div>
+        <div class="skill">React</div>
+        <div class="skill">React Native</div>
+        <div class="skill">Expo</div>
+        <div class="skill">Node.js</div>
+        <div class="skill">Eleventy</div>
+        <div class="skill">Netlify CMS</div>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Databases &amp; Messaging</h3>
+      <div class="skill-tags">
+        <div class="skill">PostgreSQL</div>
+        <div class="skill">SQLite</div>
+        <div class="skill">Redis</div>
+        <div class="skill">MQTT</div>
+        <div class="skill">WebSockets</div>
+        <div class="skill">REST API</div>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Cloud &amp; DevOps</h3>
+      <div class="skill-tags">
+        <div class="skill">AWS Lambda</div>
+        <div class="skill">AWS SAM / CDK</div>
+        <div class="skill">Docker</div>
+        <div class="skill">Keycloak</div>
+        <div class="skill">Stripe</div>
+        <div class="skill">Serverless Architecture</div>
+        <div class="skill">Microservices</div>
+        <div class="skill">Event-Driven Architecture</div>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Concepts &amp; Practices</h3>
+      <div class="skill-tags">
+        <div class="skill">BPMN / Workflow Design</div>
+        <div class="skill">Full Stack Development</div>
+        <div class="skill">Data Structures and Algorithms</div>
+        <div class="skill">Agile Methodologies</div>
+        <div class="skill">Problem Solving</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="projects">
   <h2>Projects</h2>
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="ai">AI / ML</button>
+    <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+    <button class="filter-btn" data-filter="cloud">Cloud</button>
+    <button class="filter-btn" data-filter="iot">IoT</button>
+    <button class="filter-btn" data-filter="nlp">NLP</button>
+    <button class="filter-btn" data-filter="web">Web</button>
+  </div>
   <div class="projects">
-    <div class="card">
+    <div class="card" data-category="cloud">
+      <span class="card-badge badge-cloud">Cloud / Serverless</span>
       <h2>MuleParserPython</h2>
       <p><strong>Mule-to-AWS Lambda Conversion Framework</strong><br>
-        • Production-ready framework for migrating MuleSoft 3/4 apps to AWS serverless architecture.<br>
-        • Generic XML parser with 40+ component mappings (HTTP, Transform, HL7, DB, S3, Batch).<br>
-        • Lambda code generation (Python/Node.js), SAM/CDK templates, HTML/JSON/Markdown reports.<br>
-        <em>Tech: Python · AWS Lambda · SAM/CDK · XML Parsing</em></p>
+        &bull; Production-ready framework for migrating MuleSoft 3/4 apps to AWS serverless architecture.<br>
+        &bull; Generic XML parser with 40+ component mappings (HTTP, Transform, HL7, DB, S3, Batch).<br>
+        &bull; Lambda code generation (Python/Node.js), SAM/CDK templates, HTML/JSON/Markdown reports.<br>
+        <em>Tech: Python &middot; AWS Lambda &middot; SAM/CDK &middot; XML Parsing</em></p>
+      <div class="card-links">
+        <a href="https://github.com/harish2025-selvam/MuleParserPython" target="_blank" class="card-link"><i class="fab fa-github"></i> View Code</a>
+      </div>
     </div>
-    <div class="card">
+    <div class="card" data-category="web">
+      <span class="card-badge badge-web">Web</span>
       <h2>Pentafour Website</h2>
       <p><strong>Eleventy Blog + Netlify CMS Starter Kit</strong><br>
-        • Complete website template with Eleventy SSG and Netlify CMS integration.<br>
-        • Automatic image optimization, dark mode, SEO-optimized architecture.<br>
-        <em>Tech: Eleventy · Netlify CMS · LESS CSS · JavaScript · Nunjucks</em></p>
+        &bull; Complete website template with Eleventy SSG and Netlify CMS integration.<br>
+        &bull; Automatic image optimization, dark mode, SEO-optimized architecture.<br>
+        <em>Tech: Eleventy &middot; Netlify CMS &middot; LESS CSS &middot; JavaScript &middot; Nunjucks</em></p>
+      <div class="card-links">
+        <a href="https://github.com/harish2025-selvam" target="_blank" class="card-link"><i class="fab fa-github"></i> View Code</a>
+      </div>
     </div>
-    <div class="card">
+    <div class="card" data-category="fullstack">
+      <span class="card-badge badge-fullstack">Full-Stack SaaS</span>
       <h2>iFlux SaaS Workflow Engine</h2>
       <p><strong>Multi-Tenant Workflow Engine</strong><br>
-        • Visual BPMN-style workflow designer with Keycloak JWT auth and RBAC.<br>
-        • 6 node types, CEL expressions, Redis task queuing, Stripe billing, audit logging.<br>
-        <em>Tech: Go · React · TypeScript · PostgreSQL · Redis · Keycloak · Docker</em></p>
+        &bull; Visual BPMN-style workflow designer with Keycloak JWT auth and RBAC.<br>
+        &bull; 6 node types, CEL expressions, Redis task queuing, Stripe billing, audit logging.<br>
+        <em>Tech: Go &middot; React &middot; TypeScript &middot; PostgreSQL &middot; Redis &middot; Keycloak &middot; Docker</em></p>
+      <div class="card-links">
+        <a href="https://github.com/harish2025-selvam" target="_blank" class="card-link"><i class="fab fa-github"></i> View Code</a>
+      </div>
     </div>
-    <div class="card">
+    <div class="card" data-category="nlp">
+      <span class="card-badge badge-nlp">NLP</span>
       <h2>Customer Feedback Sentiment Analysis</h2>
       <p><strong>Sentiment Analysis Dashboard</strong><br>
-        • Processed customer reviews using NLP techniques (TextBlob) for sentiment classification.<br>
-        • Built a dashboard to track real-time customer sentiment trends.<br>
-        <em>Tech: Python · Jupyter Notebook · NLP · TextBlob</em></p>
+        &bull; Processed customer reviews using NLP techniques (TextBlob) for sentiment classification.<br>
+        &bull; Built a dashboard to track real-time customer sentiment trends.<br>
+        <em>Tech: Python &middot; Jupyter Notebook &middot; NLP &middot; TextBlob</em></p>
+      <div class="card-links">
+        <a href="https://github.com/harish2025-selvam" target="_blank" class="card-link"><i class="fab fa-github"></i> View Code</a>
+      </div>
     </div>
-    <div class="card">
+    <div class="card" data-category="iot">
+      <span class="card-badge badge-iot">IoT / Automation</span>
       <h2>Virtual Smart Home Automation</h2>
       <p><strong>Event-Driven Home Automation Simulator</strong><br>
-        • Event-driven architecture with central event bus and MQTT broker simulation.<br>
-        • Sensor suite (Motion, Temperature, Light, Power) + intelligent actuators + rule engine.<br>
-        <em>Tech: Python · MQTT · Event-Driven Architecture</em></p>
+        &bull; Event-driven architecture with central event bus and MQTT broker simulation.<br>
+        &bull; Sensor suite (Motion, Temperature, Light, Power) + intelligent actuators + rule engine.<br>
+        <em>Tech: Python &middot; MQTT &middot; Event-Driven Architecture</em></p>
+      <div class="card-links">
+        <a href="https://github.com/harish2025-selvam" target="_blank" class="card-link"><i class="fab fa-github"></i> View Code</a>
+      </div>
     </div>
-    <div class="card">
+    <div class="card" data-category="ai">
+      <span class="card-badge badge-ai">AI / Medical Imaging</span>
       <h2>Breast Cancer Detection</h2>
       <p><strong>AI-Powered Medical Imaging Web App</strong><br>
-        • CNN + Transformer hybrid model for mammogram classification (Benign / Malignant / Normal).<br>
-        • Drag-and-drop interface, real-time confidence scores, report download.<br>
-        <em>Tech: Python · Flask · TensorFlow/Keras · CNN · Transformer · HTML/CSS/JS</em></p>
+        &bull; CNN + Transformer hybrid model for mammogram classification (Benign / Malignant / Normal).<br>
+        &bull; Drag-and-drop interface, real-time confidence scores, report download.<br>
+        <em>Tech: Python &middot; Flask &middot; TensorFlow/Keras &middot; CNN &middot; Transformer &middot; HTML/CSS/JS</em></p>
+      <div class="card-links">
+        <a href="https://github.com/harish2025-selvam" target="_blank" class="card-link"><i class="fab fa-github"></i> View Code</a>
+      </div>
     </div>
-    <div class="card">
+    <div class="card" data-category="ai">
+      <span class="card-badge badge-ai">AI / Mobile</span>
       <h2>Plant Disease Detector</h2>
       <p><strong>Full-Stack AI Plant Disease Detection</strong><br>
-        • CNN model (75 classes, PlantVillage dataset) with React Native frontend and Flask backend.<br>
-        • Top-5 predictions, history tracking, favourites management, camera capture.<br>
-        <em>Tech: React Native · Expo · Python · Flask · TensorFlow/Keras · OpenCV</em></p>
+        &bull; CNN model (75 classes, PlantVillage dataset) with React Native frontend and Flask backend.<br>
+        &bull; Top-5 predictions, history tracking, favourites management, camera capture.<br>
+        <em>Tech: React Native &middot; Expo &middot; Python &middot; Flask &middot; TensorFlow/Keras &middot; OpenCV</em></p>
+      <div class="card-links">
+        <a href="https://github.com/harish2025-selvam" target="_blank" class="card-link"><i class="fab fa-github"></i> View Code</a>
+      </div>
     </div>
-    <div class="card">
+    <div class="card" data-category="ai">
+      <span class="card-badge badge-ai">Computer Vision</span>
       <h2>ANPR System</h2>
       <p><strong>Automatic Number Plate Recognition</strong><br>
-        • YOLOv8 + Traditional CV detection with EasyOCR text recognition.<br>
-        • Authorisation whitelist, sound/email alerts, SQLite logging, real-time dashboard.<br>
-        <em>Tech: Python · Flask · OpenCV · EasyOCR · YOLOv8 · SQLite</em></p>
+        &bull; YOLOv8 + Traditional CV detection with EasyOCR text recognition.<br>
+        &bull; Authorisation whitelist, sound/email alerts, SQLite logging, real-time dashboard.<br>
+        <em>Tech: Python &middot; Flask &middot; OpenCV &middot; EasyOCR &middot; YOLOv8 &middot; SQLite</em></p>
+      <div class="card-links">
+        <a href="https://github.com/harish2025-selvam" target="_blank" class="card-link"><i class="fab fa-github"></i> View Code</a>
+      </div>
     </div>
-    <div class="card">
+    <div class="card" data-category="web">
+      <span class="card-badge badge-web">Web App</span>
       <h2>Attendance App</h2>
       <p><strong>Attendance Tracking Application</strong><br>
-        • Simple and effective attendance management system.<br>
-        <em>Tech: JavaScript</em></p>
+        &bull; Simple and effective attendance management system with an intuitive UI.<br>
+        <em>Tech: JavaScript &middot; HTML &middot; CSS</em></p>
+      <div class="card-links">
+        <a href="https://github.com/harish2025-selvam" target="_blank" class="card-link"><i class="fab fa-github"></i> View Code</a>
+      </div>
     </div>
   </div>
 </section>
@@ -328,6 +446,9 @@
   <p>© 2025 Harish Selvam | Built with ❤️</p>
 </footer>
 
+<button id="back-to-top" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+
 <script>
 // Particle Animation
 const canvas = document.getElementById('particles');
@@ -338,12 +459,9 @@ canvas.height = window.innerHeight;
 let particlesArray;
 class Particle {
   constructor(x, y, directionX, directionY, size, color){
-    this.x = x;
-    this.y = y;
-    this.directionX = directionX;
-    this.directionY = directionY;
-    this.size = size;
-    this.color = color;
+    this.x = x; this.y = y;
+    this.directionX = directionX; this.directionY = directionY;
+    this.size = size; this.color = color;
   }
   draw(){
     ctx.beginPath();
@@ -368,35 +486,91 @@ function init(){
     let y = Math.random() * (canvas.height - size * 2) + size;
     let directionX = (Math.random() * 0.4) - 0.2;
     let directionY = (Math.random() * 0.4) - 0.2;
-    let color = 'rgba(0,255,204,0.8)';
-    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+    particlesArray.push(new Particle(x, y, directionX, directionY, size, 'rgba(0,255,204,0.8)'));
   }
 }
 
 function animate(){
   requestAnimationFrame(animate);
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  particlesArray.forEach(particle => particle.update());
+  particlesArray.forEach(p => p.update());
 }
 
 init();
 animate();
-
-// Reveal project cards on scroll
-const cards = document.querySelectorAll('.card');
-window.addEventListener('scroll', () => {
-  const triggerBottom = window.innerHeight * 0.8;
-  cards.forEach(card => {
-    const cardTop = card.getBoundingClientRect().top;
-    if(cardTop < triggerBottom){ card.classList.add('show'); }
-  });
-});
 
 window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   init();
 });
+
+// Reveal project cards on scroll
+const cards = document.querySelectorAll('.card');
+function revealCards(){
+  const triggerBottom = window.innerHeight * 0.8;
+  cards.forEach(card => {
+    if(card.getBoundingClientRect().top < triggerBottom){ card.classList.add('show'); }
+  });
+}
+window.addEventListener('scroll', revealCards);
+revealCards();
+
+// Typing animation
+const typedEl = document.getElementById('typed-text');
+const phrases = [
+  'Aspiring AI/ML Developer',
+  'Computer Vision Engineer',
+  'Full-Stack Developer',
+  'Cloud & Serverless Builder',
+  'CS Student @ VIT Vellore'
+];
+let phraseIndex = 0, charIndex = 0, isDeleting = false;
+function type(){
+  const current = phrases[phraseIndex];
+  typedEl.innerHTML = (isDeleting ? current.substring(0, charIndex--) : current.substring(0, charIndex++))
+    + '<span class="typed-cursor">|</span>';
+  let delay = isDeleting ? 60 : 100;
+  if (!isDeleting && charIndex === current.length + 1){ delay = 1800; isDeleting = true; }
+  else if (isDeleting && charIndex === 0){ isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; delay = 400; }
+  setTimeout(type, delay);
+}
+type();
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('section[id], .hero');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    if(window.scrollY >= sec.offsetTop - 120){ current = sec.getAttribute('id') || 'hero'; }
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+});
+
+// Project filtering
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.card').forEach(card => {
+      const match = filter === 'all' || card.dataset.category === filter;
+      card.classList.toggle('hidden', !match);
+      if(match){ setTimeout(() => card.classList.add('show'), 50); }
+    });
+  });
+});
+
+// Back to top button
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('visible', window.scrollY > 400);
+});
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
 
 </body>
